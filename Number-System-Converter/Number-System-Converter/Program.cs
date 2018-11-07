@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /* Számrendszerek átváltása
  * Kérjünk be egy számot, a számrendszerét majd kérjük be azt,
@@ -111,7 +107,7 @@ namespace _027.SzámrendszerÁtváltás
 		}
 
 		public static void ClearCurrentConsoleLine()
-		{ // igen, lopott kód https://stackoverflow.com/a/8946847, de csak ez az 1
+		{ // igen, lopott kód https://stackoverflow.com/a/8946847, de csak ez az 1, igen egyszerűbben is megoldhattam volna, igen
 			int currentLineCursor = Console.CursorTop;
 			Console.SetCursorPosition(0, Console.CursorTop);
 			Console.Write(new string(' ', Console.WindowWidth));
