@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,6 @@ namespace _027.SzámrendszerÁtváltás
 {
 	class Program
 	{
-
 		static int restartedWrong = 0;
 
 		static void Main(string[] args)
@@ -20,21 +19,34 @@ namespace _027.SzámrendszerÁtváltás
 			int numberT = 0; // numberO tízesszámrendszerbeli alakja lesz
 			string numberConvStr = ""; // A végső, konvertált szám (konvTo num.sys beli) stringes alakja
 			string letters = "ABCDEFGHIJ";
-			int number = 0;
+			int number = 0, convFr = -1, convTo = -1;
+			bool convFrSuccess = false, convToSuccess = false;
 
 			// Adatok bekérése
 			Console.Write("Szám: ");
 			string numberO = Console.ReadLine().Trim().ToUpper(); // A szám amit át kell kovertálni
-			Console.Write("Számrendszere: ");
-			int convFr = int.TryParse(Console.ReadLine(), out convFr) ? convFr : -1; // Amelyik számrendszerben van a szám
-			Console.Write("Ebbe a számrendszerbe fog váltani: ");
-			int convTo = int.TryParse(Console.ReadLine(), out convTo) ? convTo : -1; // Amelyikbe akarjuk konvertálni
+
+			do
+			{
+				Console.Write("Számrendszere: ");
+				convFrSuccess = int.TryParse(Console.ReadLine(), out convFr); // Amelyikből akarjuk konvertálni
+				if (!convFrSuccess)
+					Console.SetCursorPosition(0, Console.CursorTop - 1);
+					ClearCurrentConsoleLine();
+			} while (!convFrSuccess);
+
+			do
+			{
+				Console.Write("Ebbe fog váltani: ");
+				convToSuccess = int.TryParse(Console.ReadLine(), out convTo); // Amelyikbe akarjuk konvertálni
+				if (!convToSuccess)
+					Console.SetCursorPosition(0, Console.CursorTop - 1);
+					ClearCurrentConsoleLine();
+			} while (!convToSuccess);
 
 			// Hibakeresés
 			if (numberO == "")
-			{
 				Restart();
-			}
 
 			if (numberO[0] == '-' || numberO[0] == '0')
 			{ // minusz-e, 0ával kezdődik-e, 2 és 20 között van-e a 2 számrendsz.
@@ -86,7 +98,7 @@ namespace _027.SzámrendszerÁtváltás
 			numberConvStr = new string(charArr);
 
 			// kiíratás
-			Console.WriteLine("{0} - Átváltott szám\n{1} - Tízes számrendsz. beli alakja\n\nNyomd meg az Entert az újraindításhoz...", numberConvStr, numberT);
+			Console.WriteLine("{0} - Átváltott szám\n{1} - Tízes számrendszerbeli alakja\n\nNyomd meg az Entert az újraindításhoz...", numberConvStr, numberT);
 
 			// vége(?)
 			ConsoleKeyInfo cki = Console.ReadKey();
@@ -98,6 +110,14 @@ namespace _027.SzámrendszerÁtváltás
 			}
 		}
 
+		public static void ClearCurrentConsoleLine()
+		{ // igen, lopott kód https://stackoverflow.com/a/8946847, de csak ez az 1
+			int currentLineCursor = Console.CursorTop;
+			Console.SetCursorPosition(0, Console.CursorTop);
+			Console.Write(new string(' ', Console.WindowWidth));
+			Console.SetCursorPosition(0, currentLineCursor);
+		}
+
 		static void ConvertToTen(string numFrom, ref int numTen, string allowedLetters, int convFrom)
 		{ // átkonvertál 10es számrendszerbe
 			int number;
@@ -107,13 +127,9 @@ namespace _027.SzámrendszerÁtváltás
 				char p = numFrom[i];
 				bool ifInt = Int32.TryParse(p.ToString(), out number);
 				if (ifInt)
-				{
 					numTen += int.Parse(p.ToString()) * k;
-				}
 				else
-				{
 					numTen += (allowedLetters.IndexOf(p) + 10) * k;
-				}
 				k *= convFrom;
 			}
 		}
@@ -124,13 +140,9 @@ namespace _027.SzámrendszerÁtváltás
 			do
 			{
 				if (toTurn % convTo < 10)
-				{
 					gotStr += toTurn % convTo;
-				}
 				else
-				{
 					gotStr += letters[(toTurn % convTo) - 10];
-				}
 				toTurn /= convTo;
 			} while (toTurn != 0);
 			return gotStr;
