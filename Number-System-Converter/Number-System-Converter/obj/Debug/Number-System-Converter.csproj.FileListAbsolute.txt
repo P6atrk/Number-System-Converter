@@ -1,0 +1,7 @@
+C:\Users\Patrik\source\projects\Number-System-Converter\Number-System-Converter\bin\Debug\Number-System-Converter.exe.config
+C:\Users\Patrik\source\projects\Number-System-Converter\Number-System-Converter\bin\Debug\Number-System-Converter.exe
+C:\Users\Patrik\source\projects\Number-System-Converter\Number-System-Converter\bin\Debug\Number-System-Converter.pdb
+C:\Users\Patrik\source\projects\Number-System-Converter\Number-System-Converter\obj\Debug\Number-System-Converter.csprojResolveAssemblyReference.cache
+C:\Users\Patrik\source\projects\Number-System-Converter\Number-System-Converter\obj\Debug\Number-System-Converter.csproj.CoreCompileInputs.cache
+C:\Users\Patrik\source\projects\Number-System-Converter\Number-System-Converter\obj\Debug\Number-System-Converter.exe
+C:\Users\Patrik\source\projects\Number-System-Converter\Number-System-Converter\obj\Debug\Number-System-Converter.pdb
